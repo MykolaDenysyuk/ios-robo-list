@@ -17,3 +17,9 @@ And now check the code. It's messy, isn't it? Thanks hevens that it's a small ap
 - Propose error handling for Network issues. This is totally optional. But you can get a candy for that... And fame... And some additional points... (I'm just joking. There are no points.)
 - Mind code style. We value people whose code is easy to understand. Probably I should start with mentioning that.
 - Sometimes it crashes :( It would be very nice of you if you could prevent that from happening.
+
+<p align="center"> 
+  <a href="https://dotlinkers.pl">
+    <img src="logo.png">
+  </a>
+</p>
