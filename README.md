@@ -3,7 +3,8 @@ This repository contain a short and simple task, for you to finish.
 If you want to start - clone it and open the project.
 
 ### What do you need to know to start?
-Not much actually. There is simple network request - one to be precise. Some very basic UI stuff. You should be familiar with Swift good practices, and that's all you need to know.
+Not much actually. There is simple network request - one to be precise. Some very basic UI stuff. You should be familiar with Swift good practices, and that's all you need to know.  
+Everythig should take you no more then 2 hours.
 
 ### What do we have here?
 Application is already created. It gets a string and displays random robot images based on given string. Try it.
