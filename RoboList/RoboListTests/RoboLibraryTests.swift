@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Test
+@testable import RoboList
 
 class RoboLibraryTests: XCTestCase {
   

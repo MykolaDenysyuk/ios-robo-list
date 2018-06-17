@@ -9,31 +9,32 @@
 import UIKit
 
 class RoboLibrary {
-    private var robots: [RoboModel]
-    init() {
-        self.robots = []
-        //TODO: finish this so it pass tests
-      }
-  
-    var roboCount: Int {
-        return robots.count
-      
-    }
-  
-    var newestRobot: RoboModel? {
-        return robots.last
-    }
-  
+    
+    // MARK: Vars
+    
+    private var robots = [RoboModel]()
+    var roboCount: Int { return robots.count }
+    var newestRobot: RoboModel? { return robots.last }
+    
+    // MARK: Actions
+    
     func addRobo(name: String, image: UIImage) {
-    //TODO: finish this so it pass tests
+        if let index = robots.index(where: { $0.name == name }) {
+            let existing = robots[index]
+            robots.remove(at: index)
+            robots.append(existing)
+        }
+        else {
+            robots.append(RoboModel(name: name, image: image))
+        }
     }
-  
-    func reset()
-    {
-    //TODO: finish this so it pass tests
+    
+    func reset() {
+        robots.removeAll()
     }
-  
+    
     struct RoboModel {
-    let name: String
-    let image: UIImage }
+        let name: String
+        let image: UIImage
+    }
 }
