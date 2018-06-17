@@ -92,17 +92,17 @@
 			isa = PBXGroup;
 			children = (
 				BD8387C120B1834A00752585 /* AppDelegate.swift */,
-				BD8387C320B1834A00752585 /* ViewController.swift */,
+				BD8387C820B1834C00752585 /* Assets.xcassets */,
 				6FBFEF5C20D7112A00829A44 /* Coordinator.swift */,
-				6F10C59120D6FEC300320C97 /* RobotViewCell.swift */,
+				BD8387CD20B1834C00752585 /* Info.plist */,
+				BD8387CA20B1834C00752585 /* LaunchScreen.storyboard */,
+				BD8387C520B1834A00752585 /* Main.storyboard */,
+				BD8387E120B183D100752585 /* Network.swift */,
 				BD8387F120B1FB0E00752585 /* RoboLibrary.swift */,
 				6F10C59320D7055D00320C97 /* RobotsFetcher.swift */,
-				BD8387E120B183D100752585 /* Network.swift */,
+				6F10C59120D6FEC300320C97 /* RobotViewCell.swift */,
 				6FBFEF5E20D71FD100829A44 /* Storage.swift */,
-				BD8387C520B1834A00752585 /* Main.storyboard */,
-				BD8387C820B1834C00752585 /* Assets.xcassets */,
-				BD8387CA20B1834C00752585 /* LaunchScreen.storyboard */,
-				BD8387CD20B1834C00752585 /* Info.plist */,
+				BD8387C320B1834A00752585 /* ViewController.swift */,
 			);
 			path = RoboList;
 			sourceTree = "<group>";

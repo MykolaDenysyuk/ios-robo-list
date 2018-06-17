@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var roboNameContainer: UIView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var roboNameField: UITextField!
     private var robotNameText: String { return roboNameField.text ?? "" }
     let robodex = RoboLibrary(storage: UserDefaultStorage())
@@ -31,6 +32,11 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
         roboNameField.delegate = self
         view.backgroundColor = .gray
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardAppearance(notification:)),
+                                               name: .UIKeyboardWillChangeFrame,
+                                               object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +73,21 @@ class ViewController: UIViewController {
         models.forEach { robodex.addRobo($0) }
         collectionView.reloadData()
         loadingIndicator.stopAnimating()
+    }
+    
+    @objc func keyboardAppearance(notification: Notification) {
+        guard
+            let keyboardFrame: CGRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            else {
+                bottomConstraint.constant = 0
+                return
+        }
+        
+        bottomConstraint.constant = -(view.frame.height - keyboardFrame.minY)
+        
+        UIView.animate(withDuration: 0.15) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
 

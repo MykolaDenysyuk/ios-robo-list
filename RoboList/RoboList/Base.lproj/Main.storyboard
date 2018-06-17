@@ -102,6 +102,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="OJa-kS-ID6" id="Gnh-Jj-qEi"/>
                         <outlet property="collectionView" destination="vus-09-6uA" id="s1z-MB-gKY"/>
                         <outlet property="loadingIndicator" destination="7lM-ct-KY9" id="VOP-a3-hS3"/>
                         <outlet property="roboNameContainer" destination="HeF-qo-HLT" id="hlt-Ty-LnB"/>
