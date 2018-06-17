@@ -11,6 +11,7 @@
 		6F10C59420D7055D00320C97 /* RobotsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C59320D7055D00320C97 /* RobotsFetcher.swift */; };
 		6F10C59620D7089C00320C97 /* RobotsFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C59520D7089C00320C97 /* RobotsFetcherTests.swift */; };
 		6FBFEF5D20D7112A00829A44 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBFEF5C20D7112A00829A44 /* Coordinator.swift */; };
+		6FBFEF5F20D71FD100829A44 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBFEF5E20D71FD100829A44 /* Storage.swift */; };
 		BD8387C220B1834A00752585 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8387C120B1834A00752585 /* AppDelegate.swift */; };
 		BD8387C420B1834A00752585 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8387C320B1834A00752585 /* ViewController.swift */; };
 		BD8387C720B1834A00752585 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD8387C520B1834A00752585 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		6F10C59320D7055D00320C97 /* RobotsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotsFetcher.swift; sourceTree = "<group>"; };
 		6F10C59520D7089C00320C97 /* RobotsFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotsFetcherTests.swift; sourceTree = "<group>"; };
 		6FBFEF5C20D7112A00829A44 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		6FBFEF5E20D71FD100829A44 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		BD8387BE20B1834A00752585 /* RoboList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoboList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8387C120B1834A00752585 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD8387C320B1834A00752585 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				BD8387F120B1FB0E00752585 /* RoboLibrary.swift */,
 				6F10C59320D7055D00320C97 /* RobotsFetcher.swift */,
 				BD8387E120B183D100752585 /* Network.swift */,
+				6FBFEF5E20D71FD100829A44 /* Storage.swift */,
 				BD8387C520B1834A00752585 /* Main.storyboard */,
 				BD8387C820B1834C00752585 /* Assets.xcassets */,
 				BD8387CA20B1834C00752585 /* LaunchScreen.storyboard */,
@@ -220,6 +223,7 @@
 				BD8387E220B183D100752585 /* Network.swift in Sources */,
 				BD8387F220B1FB0E00752585 /* RoboLibrary.swift in Sources */,
 				6F10C59420D7055D00320C97 /* RobotsFetcher.swift in Sources */,
+				6FBFEF5F20D71FD100829A44 /* Storage.swift in Sources */,
 				6F10C59220D6FEC300320C97 /* RobotViewCell.swift in Sources */,
 				6FBFEF5D20D7112A00829A44 /* Coordinator.swift in Sources */,
 			);

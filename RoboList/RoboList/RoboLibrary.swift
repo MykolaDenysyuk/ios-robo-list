@@ -12,11 +12,25 @@ class RoboLibrary {
     
     // MARK: Vars
     
+    let storage: Storage
     private var robots = [RoboModel]()
     var roboCount: Int { return robots.count }
     var newestRobot: RoboModel? { return robots.last }
     
+    // MARK: Initializer
+    
+    init(storage: Storage) {
+        self.storage = storage
+    }
+    
     // MARK: Actions
+    
+    func retrieveFromStorage(complete: @escaping () -> Void) {
+        storage.fetch { (models) in
+            self.robots = models
+            complete()
+        }
+    }
     
     func addRobo(name: String, image: UIImage) {
         addRoboIfNeeded(name: name, model: RoboModel(name: name, image: image))
@@ -37,6 +51,8 @@ class RoboLibrary {
         else {
             robots.append(model())
         }
+        
+        storage.save(models: robots, complete: {})
     }
     
     func reset() {

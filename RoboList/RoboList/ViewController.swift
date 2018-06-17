@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var roboNameContainer: UIView!
     @IBOutlet weak var roboNameField: UITextField!
     private var robotNameText: String { return roboNameField.text ?? "" }
-    let robodex = RoboLibrary()// TODO: make it persistent not in-memory only
+    let robodex = RoboLibrary(storage: UserDefaultStorage())
     var fetcher: Fetcher = RobotsFetcher()
     lazy var coordinator: Coordinator = {
        return RobotsCoordinator(controller: self)
@@ -31,6 +31,15 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
         roboNameField.delegate = self
         view.backgroundColor = .gray
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadingIndicator.startAnimating()
+        robodex.retrieveFromStorage {
+            self.collectionView.reloadData()
+            self.loadingIndicator.stopAnimating()
+        }
     }
     
     // MARK: Actions
