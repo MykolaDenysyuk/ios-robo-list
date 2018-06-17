@@ -8,48 +8,89 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
-  
-  typealias RoboName = String
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    roboNameField.delegate = self
-    view.backgroundColor = .gray
-  }
-  
-  @IBOutlet weak var roboImages: UIStackView!
-  @IBOutlet weak var roboNameField: UITextField!
-  let robodex = RoboLibrary()// TODO: make it persistent not in-memory only
-  
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
-  }
-  
-  func textFieldDidEndEditing(_ textField: UITextField) {
-    start()// TODO: add button to featch robot images instead of fetching it when focus is lost on text field
-  }
-
-  // TODO: clean this function,
-  func start() {
-    // TODO: use also "." and ";" as separators
-    let r = roboNameField.text!.replacingOccurrences(of: " ", with: "").components(separatedBy: ",")
-    if r.count > 1 {
-      // TODO: make it fetch only robots that wasn't featch previously
-      var i=0
-      Network().fetchFewRobots(names: r) { $0.forEach({ (image) in
-          self.robodex.addRobo(name: r[i], image: image)
-          i+=1
-          let roboImage = UIImageView(image: image)
-          roboImage.contentMode = .scaleAspectFit
-          self.roboImages.addArrangedSubview(roboImage) })
-      }
-    } else if r.count == 1 {
-      //TODO: DISPLAY AN ALERT that there is more fun with fetching more then one robo, then FETCH and DISPLAY a robot.
-    } else {
-      // TODO: DISPLAY AN ALERT that there is no robot to fetch with given string.
-      // DISPLAY random number of already fetched robots (if there are any).
+class ViewController: UIViewController {
+    
+    // MARK: Vars
+    
+    private let cellReuseIdentifier = "cell"
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var roboNameContainer: UIView!
+    @IBOutlet weak var roboNameField: UITextField!
+    private var robotNameText: String { return roboNameField.text ?? "" }
+    let robodex = RoboLibrary()// TODO: make it persistent not in-memory only
+    var fetcher: Fetcher = RobotsFetcher()
+    lazy var coordinator: Coordinator = {
+       return RobotsCoordinator(controller: self)
+    }()
+    
+    // MARK: View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.dataSource = self
+        roboNameField.delegate = self
+        view.backgroundColor = .gray
     }
-  }
+    
+    // MARK: Actions
+    
+    @IBAction func start() {
+        roboNameField.resignFirstResponder()
+        loadingIndicator.startAnimating()
+        
+        let result = fetcher.fetch(query: robotNameText) {[weak self] models in
+            guard let sself = self else { return }
+            DispatchQueue.main.async {
+                sself.reloadWith(models)
+            }
+        }
+        if result == 1 {
+           coordinator.showTryMoreNamesAlert()
+        }
+        else if result == 0 {
+            coordinator.showInvalidQueryAlert()
+            loadingIndicator.stopAnimating()
+        }
+    }
+    
+    func reloadWith(_ models: ([RoboModel])) {
+        models.forEach { robodex.addRobo($0) }
+        collectionView.reloadData()
+        loadingIndicator.stopAnimating()
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width / 2
+        return CGSize(width: width, height: width)
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return robodex.roboCount
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier,
+                                                          for: indexPath) as? RobotViewCell
+            else { fatalError("RobotViewCell is expected") }
+        
+        let robot = robodex[indexPath.row]
+        cell.setupWith(name: robot.name, image: robot.image)
+        return cell
+    }
 }

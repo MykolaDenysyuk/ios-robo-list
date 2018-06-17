@@ -19,13 +19,23 @@ class RoboLibrary {
     // MARK: Actions
     
     func addRobo(name: String, image: UIImage) {
+        addRoboIfNeeded(name: name, model: RoboModel(name: name, image: image))
+    }
+    
+    func addRobo(_ model: RoboModel) {
+        addRoboIfNeeded(name: model.name, model: model)
+    }
+    
+    /// If model with given name is in the list, it is moved to the end.
+    /// otherwise the new given model is appended
+    private func addRoboIfNeeded(name: String, model: @autoclosure () -> RoboModel) {
         if let index = robots.index(where: { $0.name == name }) {
             let existing = robots[index]
             robots.remove(at: index)
             robots.append(existing)
         }
         else {
-            robots.append(RoboModel(name: name, image: image))
+            robots.append(model())
         }
     }
     
@@ -33,8 +43,12 @@ class RoboLibrary {
         robots.removeAll()
     }
     
-    struct RoboModel {
-        let name: String
-        let image: UIImage
+    subscript(index: Int) -> RoboModel {
+        return robots[index]
     }
+}
+
+struct RoboModel {
+    let name: String
+    let image: UIImage
 }

@@ -13,44 +13,104 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RoboList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-nM-Xa8">
-                                <rect key="frame" x="220.66666666666663" y="340" width="295" height="30"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vus-09-6uA">
+                                <rect key="frame" x="0.0" y="0.0" width="736" height="344"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="XQ5-XH-ece">
+                                    <size key="itemSize" width="148" height="148"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="YsT-ng-njT" customClass="RobotViewCell" customModule="RoboList" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0CC-Z0-Sg6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="0CC-Z0-Sg6" firstAttribute="leading" secondItem="YsT-ng-njT" secondAttribute="leading" id="86Q-we-YJr"/>
+                                            <constraint firstAttribute="bottom" secondItem="0CC-Z0-Sg6" secondAttribute="bottom" id="Guh-kx-Idh"/>
+                                            <constraint firstItem="0CC-Z0-Sg6" firstAttribute="top" secondItem="YsT-ng-njT" secondAttribute="top" id="Qlz-Z1-2gP"/>
+                                            <constraint firstAttribute="trailing" secondItem="0CC-Z0-Sg6" secondAttribute="trailing" id="uTv-Du-Gd4"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="roboImageView" destination="0CC-Z0-Sg6" id="jJm-ib-Q0e"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HeF-qo-HLT" userLabel="Container">
+                                <rect key="frame" x="0.0" y="344" width="736" height="70"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-nM-Xa8">
+                                        <rect key="frame" x="20" y="20" width="628" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="7WN-u3-iuU"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tn5-wt-YYg" userLabel="Search button">
+                                        <rect key="frame" x="668" y="20" width="48" height="30"/>
+                                        <state key="normal" title="Search"/>
+                                        <connections>
+                                            <action selector="start" destination="BYZ-38-t0r" eventType="touchUpInside" id="NaO-xp-7JC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="7WN-u3-iuU"/>
-                                    <constraint firstAttribute="width" constant="295" id="Yys-5l-Unn"/>
+                                    <constraint firstItem="XUg-nM-Xa8" firstAttribute="leading" secondItem="HeF-qo-HLT" secondAttribute="leading" constant="20" id="05K-ki-KmS"/>
+                                    <constraint firstItem="Tn5-wt-YYg" firstAttribute="leading" secondItem="XUg-nM-Xa8" secondAttribute="trailing" constant="20" id="QwD-Ut-9i0"/>
+                                    <constraint firstItem="XUg-nM-Xa8" firstAttribute="top" secondItem="HeF-qo-HLT" secondAttribute="top" constant="20" id="VFd-E3-kTF"/>
+                                    <constraint firstItem="Tn5-wt-YYg" firstAttribute="centerY" secondItem="HeF-qo-HLT" secondAttribute="centerY" id="VRJ-1d-K6e"/>
+                                    <constraint firstAttribute="height" constant="70" id="jjD-yI-LyT"/>
+                                    <constraint firstAttribute="bottom" secondItem="XUg-nM-Xa8" secondAttribute="bottom" constant="20" id="yaQ-T6-M8H"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tn5-wt-YYg" secondAttribute="trailing" constant="20" id="ymA-dt-CEY"/>
                                 </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vmS-NX-xFJ">
-                                <rect key="frame" x="40" y="40" width="656" height="260"/>
-                                <variation key="heightClass=regular-widthClass=compact" axis="vertical"/>
-                            </stackView>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="7lM-ct-KY9" userLabel="Loading indicator">
+                                <rect key="frame" x="358" y="197" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XUg-nM-Xa8" secondAttribute="bottom" constant="44" id="42T-Vy-sih"/>
-                            <constraint firstItem="XUg-nM-Xa8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ISR-Xx-qYR"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vmS-NX-xFJ" secondAttribute="trailing" constant="40" id="MmN-KF-hyZ"/>
-                            <constraint firstItem="vmS-NX-xFJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="VYq-3p-X2q"/>
-                            <constraint firstItem="XUg-nM-Xa8" firstAttribute="top" secondItem="vmS-NX-xFJ" secondAttribute="bottom" constant="40" id="dTF-Xv-a3N"/>
-                            <constraint firstItem="vmS-NX-xFJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="s9f-gR-fcD"/>
+                            <constraint firstItem="HeF-qo-HLT" firstAttribute="top" secondItem="vus-09-6uA" secondAttribute="bottom" id="8qF-BZ-eBW"/>
+                            <constraint firstItem="HeF-qo-HLT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9GQ-9P-ygG"/>
+                            <constraint firstItem="7lM-ct-KY9" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="CdG-Wb-ax4"/>
+                            <constraint firstItem="vus-09-6uA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Enh-mN-hSx"/>
+                            <constraint firstItem="HeF-qo-HLT" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="OJa-kS-ID6"/>
+                            <constraint firstItem="vus-09-6uA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WuT-LH-HNl"/>
+                            <constraint firstItem="7lM-ct-KY9" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="aNv-YJ-1rI"/>
+                            <constraint firstItem="vus-09-6uA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aeo-gS-4rt"/>
+                            <constraint firstItem="HeF-qo-HLT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="mdg-2G-ogx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="roboImages" destination="vmS-NX-xFJ" id="D17-we-GZN"/>
+                        <outlet property="collectionView" destination="vus-09-6uA" id="s1z-MB-gKY"/>
+                        <outlet property="loadingIndicator" destination="7lM-ct-KY9" id="VOP-a3-hS3"/>
+                        <outlet property="roboNameContainer" destination="HeF-qo-HLT" id="hlt-Ty-LnB"/>
                         <outlet property="roboNameField" destination="XUg-nM-Xa8" id="oQR-zV-O7E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.608695652173914" y="27.536231884057973"/>
         </scene>
     </scenes>
 </document>
