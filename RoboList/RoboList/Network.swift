@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 
 protocol RobotRepository {
-    func fetchFewRobots(names: [String], completion: @escaping ([UIImage]) -> Void)
-    func fetchRobot(with name: String, completion: @escaping (UIImage) -> Void)
+    func fetchFewRobots(names: [String], completion: @escaping ([UIImage?]) -> Void)
+    func fetchRobot(with name: String, completion: @escaping (UIImage?) -> Void)
 }
 
 class Network: RobotRepository {
     
-    func fetchFewRobots(names: [String], completion: @escaping ([UIImage]) -> Void) {
+    func fetchFewRobots(names: [String], completion: @escaping ([UIImage?]) -> Void) {
         let updateQueue = DispatchQueue(label: "fetchFewRobots.updateQueue")
         
-        var images = [UIImage]()
+        var images = [UIImage?]()
         let group = DispatchGroup()
         
         names.forEach { name in
@@ -37,12 +37,16 @@ class Network: RobotRepository {
         }
     }
     
-    // TODO: prevent it from crashing!
-    // propose error handling
-    func fetchRobot(with name: String, completion: @escaping (UIImage) -> Void) {
+    func fetchRobot(with name: String, completion: @escaping (UIImage?) -> Void) {
         let url = URL(string: "https://robohash.org/\(name)")!
         let dataTask = URLSession(configuration: .default).dataTask(with: url) { (data, _, _) in
-            completion(UIImage(data: data!)!)
+            let image: UIImage? = {
+                if let data = data {
+                    return UIImage(data: data)
+                }
+                return nil
+            }()
+            completion(image)
         }
         dataTask.resume()
     }

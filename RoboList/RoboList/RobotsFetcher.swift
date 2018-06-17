@@ -59,8 +59,11 @@ class RobotsFetcher: Fetcher {
     func fetch(query: String, completion: @escaping ([RoboModel]) -> Void) -> Int {
         let names = breakIntoNames(query)
         repository.fetchFewRobots(names: names) { (images) in
-            let models = images.enumerated().map { RoboModel(name: names[$0.offset],
-                                                             image: $0.element) }
+            let models = images.enumerated().compactMap {
+                guard let image = $0.element else { return nil }
+                return RoboModel(name: names[$0.offset],
+                                 image: image)
+            } as [RoboModel]
             completion(models)
         }
         return names.count
